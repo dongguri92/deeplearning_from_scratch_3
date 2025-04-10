@@ -66,7 +66,7 @@ class Square(Function):
         return y
 
     def backward(self, gy):
-        x = self.inputs[0].data # <-- x = self.input.data
+        x = self.inputs[0].data # <-- x = self.input.data, 단수형에서 복수형으로 변환
         gx = 2 * x * gy
         return gx
 

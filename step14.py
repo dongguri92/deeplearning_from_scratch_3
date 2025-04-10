@@ -29,7 +29,7 @@ class Variable:
             if not isinstance(gxs, tuple):
                 gxs = (gxs,)
 
-            for x, gx in zip(f.inputs, gxs):
+            for x, gx in zip(f.inputs, gxs): # 동일한 변수를 써서 덮어써지는 것 방지
                 if x.grad is None:
                     x.grad = gx
                 else:
