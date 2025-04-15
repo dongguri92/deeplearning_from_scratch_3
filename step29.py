@@ -11,7 +11,7 @@ if not dezero.is_simple_core:
     from dezero.core_simple import Variable
     from dezero.core_simple import setup_variable
     setup_variable()
-
+ 
 
 def f(x):
     y = x ** 4 - 2 * x ** 2
