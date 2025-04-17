@@ -89,10 +89,10 @@ class Variable:
     def cleargrad(self):
         self.grad = None
 
-    def backward(self, retain_grad=False, create_graph=False):
+    def backward(self, retain_grad=False, create_graph=False): # 역전파 비활성 보드
         if self.grad is None:
             xp = dezero.cuda.get_array_module(self.data)
-            self.grad = Variable(xp.ones_like(self.data))
+            self.grad = Variable(np.ones_like(self.data)) # self.grad가 Variable 인스턴스를 담게 됨
 
         funcs = []
         seen_set = set()
@@ -108,7 +108,7 @@ class Variable:
             f = funcs.pop()
             gys = [output().grad for output in f.outputs]  # output is weakref
 
-            with using_config('enable_backprop', create_graph):
+            with using_config('enable_backprop', create_graph): # 역전파 처리할 때 비활성 사용
                 gxs = f.backward(*gys)
                 if not isinstance(gxs, tuple):
                     gxs = (gxs,)
@@ -235,7 +235,7 @@ class Mul(Function):
         return y
 
     def backward(self, gy):
-        x0, x1 = self.inputs
+        x0, x1 = self.inputs # Variable 인스턴스 그대로 사용
         gx0 = gy * x1
         gx1 = gy * x0
         if x0.shape != x1.shape:  # for broadcast
