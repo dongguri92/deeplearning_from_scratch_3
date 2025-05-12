@@ -6,7 +6,7 @@ from dezero import Variable
 
 x = Variable(np.array(2.0))
 y = x ** 2
-y.backward(create_graph=True)
+y.backward(create_graph=True) # 미분을 하기 위해 역전파 --> 만들어낸 계산 그래프를 사용하여 새로운 계산을 하고 다시 역전파
 gx = x.grad
 x.cleargrad()
 
