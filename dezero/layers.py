@@ -15,7 +15,7 @@ class Layer:
         self._params = set()
 
     def __setattr__(self, name, value):
-        if isinstance(value, (Parameter, Layer)):
+        if isinstance(value, (Parameter, Layer)): # isinstance(확인하고자 하는 데이터 값, 확인하고자 하는 데이터 타입)
             self._params.add(name)
         super().__setattr__(name, value)
 
