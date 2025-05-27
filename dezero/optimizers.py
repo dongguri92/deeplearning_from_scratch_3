@@ -12,8 +12,8 @@ class Optimizer:
 
     def setup(self, target):
         self.target = target
-        return self
-
+        return self # 자기 자신(객체)을 반환
+    
     def update(self):
         params = [p for p in self.target.params() if p.grad is not None]
 
@@ -28,7 +28,6 @@ class Optimizer:
 
     def add_hook(self, f):
         self.hooks.append(f)
-
 
 # =============================================================================
 # Hook functions
