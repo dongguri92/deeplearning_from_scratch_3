@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 from dezero.utils import get_file, cache_dir
 from dezero.transforms import Compose, Flatten, ToFloat, Normalize
 
-
 class Dataset:
     def __init__(self, train=True, transform=None, target_transform=None):
         self.train = train
@@ -82,11 +81,11 @@ class MNIST(Dataset):
         super().__init__(train, transform, target_transform)
 
     def prepare(self):
-        url = 'http://yann.lecun.com/exdb/mnist/'
+        url = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
         train_files = {'target': 'train-images-idx3-ubyte.gz',
-                       'label': 'train-labels-idx1-ubyte.gz'}
+                    'label': 'train-labels-idx1-ubyte.gz'}
         test_files = {'target': 't10k-images-idx3-ubyte.gz',
-                      'label': 't10k-labels-idx1-ubyte.gz'}
+                    'label': 't10k-labels-idx1-ubyte.gz'}
 
         files = train_files if self.train else test_files
         data_path = get_file(url + files['target'])
@@ -94,6 +93,7 @@ class MNIST(Dataset):
 
         self.data = self._load_data(data_path)
         self.label = self._load_label(label_path)
+
 
     def _load_label(self, filepath):
         with gzip.open(filepath, 'rb') as f:
